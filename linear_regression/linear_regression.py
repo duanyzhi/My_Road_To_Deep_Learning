@@ -20,7 +20,20 @@ y_anr = y + n   # 输出系统的噪声信号
 plt.plot(x, y_anr, "ks")   # 画出分布图
 plt.xlabel('x')
 plt.ylabel('y')
-plt.table
+
+
+theta_0, theta_1 = 0, 0
+m = len(x)
+alpha = 0.001
+for kk in range(10000):
+    h_theta = theta_0 + theta_1 * x
+    theta_0 -= alpha*1/m*sum(h_theta - y_anr)
+    theta_1 -= alpha*1/m*sum((h_theta - y_anr)*x)
+
+print(theta_0, theta_1)
+
+y_pre = theta_0 + theta_1*x
+plt.plot(x, y_pre, 'r')
 plt.show()
 
 
